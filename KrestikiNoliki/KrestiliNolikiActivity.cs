@@ -13,7 +13,7 @@ namespace KrestikiNoliki
     {
         int count = 1;
         private TableLayout layout;
-        public KrestikinolikiActivity()
+        public KrestiliNolikiActivity()
         {
             game = new Game();
             game.start(); // будет реализован позже
