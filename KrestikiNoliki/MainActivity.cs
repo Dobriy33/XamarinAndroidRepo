@@ -12,19 +12,17 @@ namespace KrestikiNoliki
     public class MainActivity : Activity
     {
         int count = 1;
-
+        private TableLayout layout;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
-
+            SetContentView(Resource.Layout.TableLayout);
+            TableLayout layout = (TableLayout) FindViewById(Resource.Id.main_l);
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
-
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            buildGameField();
         }
     }
 }

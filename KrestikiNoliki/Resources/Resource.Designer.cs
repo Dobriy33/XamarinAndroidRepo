@@ -63,6 +63,9 @@ namespace KrestikiNoliki
 			// aapt resource value: 0x7f050000
 			public const int MyButton = 2131034112;
 			
+			// aapt resource value: 0x7f050001
+			public const int main_l = 2131034113;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -78,6 +81,9 @@ namespace KrestikiNoliki
 			
 			// aapt resource value: 0x7f030000
 			public const int Main = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int TableLayout = 2130903041;
 			
 			static Layout()
 			{
