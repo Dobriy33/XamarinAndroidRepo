@@ -21,9 +21,9 @@ namespace KrestikiNoliki
         {
             field = new Square[3,3];
             int squareCount = 0;
-            for (int i = 0, l = field.Length; i < l; i++)
+            for (int i = 0, l = field.GetLength(0); i < l; i++)
             {
-                for (int j = 0, l2 = field.Length; j < l2; j++)
+                for (int j = 0, l2 = field.GetLength(1); j < l2; j++)
                 {
                     field[i,j] = new Square();
                     squareCount++;
