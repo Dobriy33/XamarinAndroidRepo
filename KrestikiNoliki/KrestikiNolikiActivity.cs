@@ -16,7 +16,7 @@ namespace KrestikiNoliki
         public KrestikiNolikiActivity()
         {
             //Game game = new Game();
-           // game.start(); // будет реализован позже
+            // game.start(); // будет реализован позже
         }
 
 
@@ -26,14 +26,14 @@ namespace KrestikiNoliki
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.TableLayout);
-           // TableLayout layout = (TableLayout)FindViewById(Resource.Id.main_l);
+            buildGameField();
+            // TableLayout layout = (TableLayout)FindViewById(Resource.Id.main_l);
             // Get our button from the layout resource,
             // and attach an event to it
-            buildGameField();
 
         }
 
-        private Button[,] buttons = new Button[3,3];
+        private Button[,] buttons = new Button[3, 3];
         //(....)
         private void buildGameField()
         {
@@ -44,13 +44,15 @@ namespace KrestikiNoliki
             for (int i = 0, lenI = field.GetLength(0); i < lenI; i++)
             {
                 TableRow row = new TableRow(this); // создание строки таблицы
-                for (int j = 0, lenJ = field.GetLength(1); j < lenJ; j++) /*field[i,j]*/ //GetLength возвращает длину массива в измерении (i) измерения считаюся с 0
+                for (int j = 0, lenJ = field.GetLength(1); j < lenJ; j++) //GetLength возвращает длину многомерного  массива в измерении (i) измерения считаюся с 0
                 {
                     Button button = new Button(this);
-                    buttons[i,j] = button;
-                    button.Click += (sender, e) => {
-                        button.Text = "+";
-                    };                   //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
+                    buttons[i, j] = button;
+                    button.Click += (s, e) => {
+                        
+                    };
+                    ;
+                    //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
                     row.AddView(button, new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent,
                             TableRow.LayoutParams.WrapContent)); // добавление кнопки в строку таблицы
                     button.SetWidth(107);
@@ -59,7 +61,33 @@ namespace KrestikiNoliki
                 layout.AddView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WrapContent,
                         TableLayout.LayoutParams.WrapContent)); // добавление строки в таблицу
             }
+
+        }
+
+        public class Listener
+        {
+            private int x = 0;
+            private int y = 0;
+
+            public Listener(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public void onClick(object sender, EventArgs e)
+            {
+                Button tbutton = (Button)sender;
+                
+                game.makeTurn(x, y);
+            }
         }
     }
 }
+
+
+
+
+
+
 

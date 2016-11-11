@@ -21,7 +21,7 @@ namespace KrestikiNoliki
             this.player = player;
         }
 
-        public Boolean isField()
+        public Boolean isFilled()
         {
             if (player != null) {
                 return true;
