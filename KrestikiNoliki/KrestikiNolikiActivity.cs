@@ -49,13 +49,16 @@ namespace KrestikiNoliki
                     Button button = new Button(this);
                     buttons[i, j] = button;
                     buttons[i,j].Tag = j * 10 + i;
-                    button.Click += (s, e) => {
+                    button.Click += (sender, e) => {
                         Button curButton = (Button)sender;
-
+                        Player player = game.getCurrentActivePlayer();
                         int index = (int)curButton.Tag;
                         int x = index / 10; // строка
                         int y = index % 10; //столбец
-                        game.makeTurn(x, y);
+                        if (game.makeTurn(x, y))
+                        {
+                            curButton.Text = player.getName();
+                        }
                     };
                     ;
                     //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
