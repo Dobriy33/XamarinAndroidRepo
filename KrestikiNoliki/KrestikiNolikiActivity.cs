@@ -48,9 +48,8 @@ namespace KrestikiNoliki
                 {
                     Button button = new Button(this);
                     buttons[i, j] = button;
-                    button.Click += (s, e) => {
-                        
-                    };
+                    buttons[i,j].Tag = j * 10 + i;
+                    button.Click += (s, e) => game.makeTurn();
                     ;
                     //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
                     row.AddView(button, new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent,
