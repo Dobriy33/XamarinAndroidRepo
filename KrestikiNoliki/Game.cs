@@ -12,6 +12,11 @@ using Android.Widget;
 
 namespace KrestikiNoliki
 {
+
+    public interface IWinnerChecker
+    {
+        Player checkWinner();
+    }
     public class Game
     {
         // игроки
