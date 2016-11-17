@@ -17,7 +17,9 @@ namespace KrestikiNoliki
         {
             //Game game = new Game();
             //game.start(); // будет реализован позже
+
         }
+
 
 
         protected override void OnCreate(Bundle bundle)
@@ -35,11 +37,12 @@ namespace KrestikiNoliki
 
         private Button[,] buttons = new Button[3, 3];
         //(....)
-        private void buildGameField()
+        
+        public void buildGameField()
         {
             Game game = new Game();
             TableLayout layout = (TableLayout)FindViewById(Resource.Id.main_l);
-            game.start(); 
+            game.start();
             Square[,] field = game.getField();
             for (int i = 0, lenI = field.GetLength(0); i < lenI; i++)
             {
@@ -48,8 +51,9 @@ namespace KrestikiNoliki
                 {
                     Button button = new Button(this);
                     buttons[i, j] = button;
-                    buttons[i,j].Tag = j * 10 + i;
-                    button.Click += (sender, e) => {
+                    buttons[i, j].Tag = j * 10 + i;
+                    button.Click += (sender, e) =>
+                    {
                         Button curButton = (Button)sender;
                         Player player = game.getCurrentActivePlayer();
                         int index = (int)curButton.Tag;
@@ -59,26 +63,26 @@ namespace KrestikiNoliki
                         {
                             curButton.Text = player.getName();
                         }
+                        Player winner = game.checkWinner();
+                        if (winner != null)
+                        {
+                            game.gameOver(winner);
+                        }
+                        if (game.isFieldFilled())
+                        {  // в случае, если поле заполнено
+                            game.gameOver();
+                        }
                     };
-                    ;
-                    //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
                     row.AddView(button, new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent,
                             TableRow.LayoutParams.WrapContent)); // добавление кнопки в строку таблицы
                     button.SetWidth(107);
                     button.SetHeight(107);
                 }
+
                 layout.AddView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WrapContent,
                         TableLayout.LayoutParams.WrapContent)); // добавление строки в таблицу
             }
-
         }
-
+        
     }
 }
-
-
-
-
-
-
-

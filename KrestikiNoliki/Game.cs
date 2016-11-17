@@ -43,13 +43,13 @@ namespace KrestikiNoliki
 
         public Game()
         {
-            field = new Square[3,3];
+            field = new Square[3, 3];
             int squareCount = 0;
             for (int i = 0, l = field.GetLength(0); i < l; i++)
             {
                 for (int j = 0, l2 = field.GetLength(1); j < l2; j++)
                 {
-                    field[i,j] = new Square();
+                    field[i, j] = new Square();
                     squareCount++;
                 }
             }
@@ -110,7 +110,7 @@ namespace KrestikiNoliki
             return activePlayer;
         }
 
-        public bool isFieldFilled() 
+        public bool isFieldFilled()
         {
             return squareCount == filled;
         }
@@ -127,12 +127,59 @@ namespace KrestikiNoliki
             {
                 for (int j = 0, l2 = field.GetLength(1); j < l2; j++)
                 {
-                    field[i,j].fill(null);
+                    field[i, j].fill(null);
                 }
             }
             filled = 0;
         }
-
-       
+        
+        public void gameOver(Player player)
+        {
+            String text = "Player \"" + player.getName() + "\" won!";
+            Toast.MakeText(Application.Context, text, ToastLength.Short).Show();
+            reset();
+            //refresh();
         }
+
+        public void gameOver()
+        {
+            String text = "Draw";
+            Toast.MakeText(Application.Context, text, ToastLength.Short).Show();
+            reset();
+            //refresh();
+        }
+        public Player checkWinner()
+        {
+            foreach (IWinnerChecker winChecker in winnerCheckers)
+            {
+                Player winner = winChecker.checkWinner();
+                if (winner != null)
+                {
+                    return winner;
+                }
+            }
+            return null;
+        }
+        /*public void refresh()
+        {
+            Square[,] field = game.getField();
+            Button button = new Button(this);
+            buttons[i, j] = button;
+
+            for (int i = 0, len = field.GetLength(0); i < len; i++)
+            {
+                for (int j = 0, len2 = field.GetLength(1); j < len2; j++)
+                {
+                    if (field[i, j].getPlayer() == null)
+                    {
+                        buttons[i, j].Text = "";
+                    }
+                    else
+                    {
+                        buttons[i, j].Text = field[i, j].getPlayer().getName();
+                    }
+                }
+            }
+        }*/
+    }
 }
