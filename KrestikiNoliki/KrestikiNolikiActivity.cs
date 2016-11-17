@@ -49,7 +49,7 @@ namespace KrestikiNoliki
                     Button button = new Button(this);
                     buttons[i, j] = button;
                     buttons[i,j].Tag = j * 10 + i;
-                    button.Click += (s, e) => game.makeTurn();
+                    button.Click += (s, e) => game.makeTurn(s,e);
                     ;
                     //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
                     row.AddView(button, new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent,
@@ -63,24 +63,6 @@ namespace KrestikiNoliki
 
         }
 
-        public class Listener
-        {
-            private int x = 0;
-            private int y = 0;
-
-            public Listener(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public void onClick(object sender, EventArgs e)
-            {
-                Button tbutton = (Button)sender;
-                
-                game.makeTurn(x, y);
-            }
-        }
     }
 }
 
