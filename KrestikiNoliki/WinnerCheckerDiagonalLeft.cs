@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace KrestikiNoliki
 {
-    class WinnerCheckerDiagonalLeft
+    class WinnerCheckerDiagonalLeft : IWinnerChecker
     {
         private Game game;
 

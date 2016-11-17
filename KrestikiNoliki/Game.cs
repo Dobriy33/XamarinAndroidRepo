@@ -37,6 +37,8 @@ namespace KrestikiNoliki
         //всего €чеек
         private int squareCount;
 
+        private IWinnerChecker[] winnerCheckers;
+
 
 
         public Game()
@@ -55,6 +57,12 @@ namespace KrestikiNoliki
             started = false;
             activePlayer = null;
             filled = 0;
+
+            winnerCheckers = new IWinnerChecker[4];
+            winnerCheckers[0] = new WinnerCheckerHorizontal(this);
+            winnerCheckers[1] = new WinnerCheckerVertical(this);
+            winnerCheckers[2] = new WinnerCheckerDiagonalLeft(this);
+            winnerCheckers[3] = new WinnerCheckerDiagonalRight(this);
         }
 
         public void start()
