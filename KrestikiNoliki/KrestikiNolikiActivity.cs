@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -15,8 +17,8 @@ namespace KrestikiNoliki
         private TableLayout layout;
         public KrestikiNolikiActivity()
         {
-            //Game game = new Game();
-            //game.start(); // будет реализован позже
+            Game game = new Game();
+            
 
         }
 
@@ -25,10 +27,10 @@ namespace KrestikiNoliki
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            Game game = new Game();
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.TableLayout);
-            buildGameField();
+            buildGameField(game);
             // TableLayout layout = (TableLayout)FindViewById(Resource.Id.main_l);
             // Get our button from the layout resource,
             // and attach an event to it
@@ -38,9 +40,9 @@ namespace KrestikiNoliki
         private Button[,] buttons = new Button[3, 3];
         //(....)
         
-        public void buildGameField()
+        public void buildGameField(Game g)
         {
-            Game game = new Game();
+            Game game = g;
             TableLayout layout = (TableLayout)FindViewById(Resource.Id.main_l);
             game.start();
             Square[,] field = game.getField();
@@ -67,10 +69,12 @@ namespace KrestikiNoliki
                         if (winner != null)
                         {
                             game.gameOver(winner);
+                            refresh(game);
                         }
-                        if (game.isFieldFilled())
+                        else if (game.isFieldFilled())
                         {  // в случае, если поле заполнено
                             game.gameOver();
+                            refresh(game);
                         }
                     };
                     row.AddView(button, new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent,
@@ -83,6 +87,24 @@ namespace KrestikiNoliki
                         TableLayout.LayoutParams.WrapContent)); // добавление строки в таблицу
             }
         }
-        
+        public void refresh(Game g)
+        {
+            Game game = g;
+            Square[,] field = game.getField();
+            for (int i = 0, len = field.GetLength(0); i < len; i++)
+            {
+                for (int j = 0, len2 = field.GetLength(1); j < len2; j++)
+                {
+                    if (field[i, j].getPlayer() == null)
+                    {
+                        buttons[i, j].Text = "";
+                    }
+                    else
+                    {
+                        buttons[i, j].Text = field[i, j].getPlayer().getName();
+                    }
+                }
+            }
+        }
     }
 }

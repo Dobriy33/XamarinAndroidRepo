@@ -112,7 +112,7 @@ namespace KrestikiNoliki
 
         public bool isFieldFilled()
         {
-            return squareCount == filled;
+            return filled == 9; // ==squareCount
         }
 
         public void reset()
@@ -138,7 +138,6 @@ namespace KrestikiNoliki
             String text = "Player \"" + player.getName() + "\" won!";
             Toast.MakeText(Application.Context, text, ToastLength.Short).Show();
             reset();
-            //refresh();
         }
 
         public void gameOver()
@@ -146,7 +145,6 @@ namespace KrestikiNoliki
             String text = "Draw";
             Toast.MakeText(Application.Context, text, ToastLength.Short).Show();
             reset();
-            //refresh();
         }
         public Player checkWinner()
         {
