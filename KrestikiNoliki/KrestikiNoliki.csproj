@@ -55,6 +55,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Square.cs" />
+    <Compile Include="WinnerCheckerDiagonalLeft.cs" />
     <Compile Include="WinnerCheckerHorizontal.cs" />
     <Compile Include="WinnerCheckerVertical.cs" />
   </ItemGroup>
