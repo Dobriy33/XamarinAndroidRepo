@@ -75,19 +75,16 @@ namespace KrestikiNoliki
             activePlayer = player;
         }
 
-        public void makeTurn(object sender, EventArgs e)   //
+        public bool makeTurn(int x, int y)   //
         {
-            Button curButton = (Button)sender;
-
-            int index = (int)curButton.Tag;
-            int x = index / 10; // строка
-            int y = index % 10; //столбец
-            if (!field[x, y].isFilled())
+            if (field[x, y].isFilled())
             {
-                field[x, y].fill(getCurrentActivePlayer());
-                filled++;
-                switchPlayers();
+                return false;
             }
+            field[x, y].fill(getCurrentActivePlayer());
+            filled++;
+            switchPlayers();
+            return true;
         }
 
         private void switchPlayers()

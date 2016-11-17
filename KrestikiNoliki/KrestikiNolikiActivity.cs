@@ -16,7 +16,7 @@ namespace KrestikiNoliki
         public KrestikiNolikiActivity()
         {
             //Game game = new Game();
-            // game.start(); // будет реализован позже
+            //game.start(); // будет реализован позже
         }
 
 
@@ -39,7 +39,7 @@ namespace KrestikiNoliki
         {
             Game game = new Game();
             TableLayout layout = (TableLayout)FindViewById(Resource.Id.main_l);
-
+            game.start(); 
             Square[,] field = game.getField();
             for (int i = 0, lenI = field.GetLength(0); i < lenI; i++)
             {
@@ -49,7 +49,14 @@ namespace KrestikiNoliki
                     Button button = new Button(this);
                     buttons[i, j] = button;
                     buttons[i,j].Tag = j * 10 + i;
-                    button.Click += (s, e) => game.makeTurn(s,e);
+                    button.Click += (s, e) => {
+                        Button curButton = (Button)sender;
+
+                        int index = (int)curButton.Tag;
+                        int x = index / 10; // строка
+                        int y = index % 10; //столбец
+                        game.makeTurn(x, y);
+                    };
                     ;
                     //SetOnClickListener(new Listener(i, j)); // установка слушателя, реагирующего на клик по кнопке
                     row.AddView(button, new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent,
